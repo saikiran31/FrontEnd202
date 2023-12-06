@@ -46,15 +46,15 @@ const toggleShowtimes = (theatreId) => {
     const fetchMovieDetails = async () => {
       try {
         // Fetch movie details
-        const movieResponse = await fetch(`/movies/${movieId}`);
+        const movieResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/movies/${movieId}`);
         const movieData = await movieResponse.json();
         setMovie(movieData);
         let theatreShowtimesMap = {};
-        const theatres = await fetch(`/movies?movieid=${movieId}`);
+        const theatres = await fetch(`${process.env.REACT_APP_BACKEND_URL}/movies?movieid=${movieId}`);
         const theatresData = await theatres.json();
         for (let i = 0; i < theatresData.length; i++) {
           const showsData = await fetch(
-            `/movies?movieid=${movieId}&theatreid=${theatresData[i]._id}`
+            `${process.env.REACT_APP_BACKEND_URL}/movies?movieid=${movieId}&theatreid=${theatresData[i]._id}`
           );
           const shows = await showsData.json();
           theatreShowtimesMap[theatresData[i]._id] = {

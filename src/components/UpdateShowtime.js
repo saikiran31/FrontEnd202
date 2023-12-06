@@ -18,7 +18,7 @@ const UpdateShowtime = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`/showtimes/${id}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/showtimes/${id}`);
       const data = await response.json();
       setShowtime(data);
       const date = new Date(data.showDate);
@@ -38,7 +38,7 @@ const UpdateShowtime = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`/showtimes/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/showtimes/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

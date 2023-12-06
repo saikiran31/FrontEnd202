@@ -19,7 +19,7 @@ function Signup() {
   const navigate = useNavigate();
 
   const registerApi = (body) => {
-    return axios.post("/api/register", body, {
+    return axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/register`, body, {
     });
   };
 

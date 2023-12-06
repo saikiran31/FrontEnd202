@@ -11,13 +11,13 @@ const ScreenListings = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`/screens?theatreid=${id}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/screens?theatreid=${id}`);
       const data = await response.json();
       setScreens(data);
     };
 
     const fetchTheatre = async () => {
-        const response = await fetch(`/theatres/${id}`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/theatres/${id}`);
         const data = await response.json();
         setTheatre(data);
       };
@@ -31,7 +31,7 @@ const ScreenListings = () => {
     if (window.confirm("Are you sure you want to delete this movie?")) {
         try {
           const token = localStorage.getItem('token');
-          const response = await fetch(`/screens/${screenId}`, {
+          const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/screens/${screenId}`, {
             method: 'DELETE',
             headers: {
               'Authorization': `Bearer ${token}`

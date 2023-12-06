@@ -17,7 +17,7 @@ const SeatingChart = () => {
     const fetchShowtimeDetails = async () => {
       try {
         // Fetch showtime details including movieId
-        const showtimeResponse = await axios.get(`/showtimes/${showtimeId}`);
+        const showtimeResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/showtimes/${showtimeId}`);
         const { rows, cols, seats_booked, movieid, price } =
           showtimeResponse.data;
         setSeatingLayout({ rows, cols, seats_booked });
@@ -25,7 +25,7 @@ const SeatingChart = () => {
 
         // Fetch movie details
         if (movieid) {
-          const movieResponse = await axios.get(`/movies/${movieid}`);
+          const movieResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/movies/${movieid}`);
           setMovieTitle(movieResponse.data.movieName);
           setMovieImage(movieResponse.data.img)
         }

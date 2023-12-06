@@ -6,7 +6,7 @@ const MovieListings = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    fetch("/movie-analytics")
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/movie-analytics`)
       .then((response) => response.json())
       .then((data) => {
         setMovies(data);

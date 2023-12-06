@@ -13,7 +13,7 @@ function AddShowtime() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("/movies")
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/movies`)
         .then((response) => response.json())
         .then((data)=>{
             setMovies(data);
@@ -24,7 +24,7 @@ function AddShowtime() {
     },[]);
 
     useEffect(() => {
-        fetch("/theatres")
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/theatres`)
             .then((response) => response.json())
             .then((data)=>{
                 setTheatres(data);
@@ -43,7 +43,7 @@ function AddShowtime() {
 
     useEffect(() => {
         if (theatre_id) {
-            fetch(`/screens?theatreid=${ theatre_id }`)
+            fetch(`${process.env.REACT_APP_BACKEND_URL}/screens?theatreid=${ theatre_id }`)
                 .then((response) => response.json())
                 .then((data)=>{
                     setScreens(data);
@@ -58,7 +58,7 @@ function AddShowtime() {
     const [msg, setMsg] = useState({ m: "", t: "" });
     const token = localStorage.getItem('token');
     const registerApi = (body) => {
-        return axios.post("/showtimes", body, {
+        return axios.post(`${process.env.REACT_APP_BACKEND_URL}/showtimes`, body, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`

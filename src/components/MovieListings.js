@@ -10,7 +10,7 @@ const MovieListings = () => {
   const { auth } = useAuth(); // Use the hook to access auth state
 
   useEffect(() => {
-    fetch("/movies")
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/movies`)
       .then((response) => response.json())
       .then((data) => {
         setMovies(data);
@@ -28,7 +28,7 @@ const MovieListings = () => {
     if (window.confirm("Are you sure you want to delete this movie?")) {
       const token = localStorage.getItem('token');
       try {
-        const response = await fetch(`/movies/${movieId}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/movies/${movieId}`, {
           method: 'DELETE',
           headers: { 'Authorization': `Bearer ${token}` },
         });

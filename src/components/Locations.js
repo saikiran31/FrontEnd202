@@ -6,7 +6,7 @@ const Locations = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/locations")
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/locations`)
       .then((res) => res.json())
       .then((data) => setLocations(data))
       .catch((error) =>

@@ -17,12 +17,12 @@ const Profile = () => {
     const fetchMemberData = async () => {
       try {
         // Fetch member details
-        const response = await fetch(`/member/${id}/profile`);
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/member/${id}/profile`);
         const memberData = await response.json();
         setMemberData(memberData);
 
         // Fetch movie history
-        const historyResponse = await fetch(`/member/${id}/movie-history`);
+        const historyResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/member/${id}/movie-history`);
         const historyData = await historyResponse.json();
         setMovieHistory(historyData);
       } catch (error) {
@@ -37,7 +37,7 @@ const Profile = () => {
     const fetchTickets = async () => {
       try {
         // Fetch tickets purchased
-        const ticketsResponse = await fetch(`/tickets`);
+        const ticketsResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tickets`);
         const ticketsResponseData = await ticketsResponse.json();
         const filteredTickets = ticketsResponseData.filter((ticket) => ticket.memberid === id);
 
@@ -45,7 +45,7 @@ const Profile = () => {
         for (let i = 0; i < filteredTickets.length; i++) {
           console.log(filteredTickets[i]);
           const showtimeResponse = await fetch(
-            `/showtimes/${filteredTickets[i].showid}`
+            `${process.env.REACT_APP_BACKEND_URL}/showtimes/${filteredTickets[i].showid}`
           );
           const showtime = await showtimeResponse.json();
           
@@ -56,7 +56,7 @@ const Profile = () => {
             continue;
           }
 
-          const movieResponse = await fetch(`/movies/${showtime.movieid}`);
+          const movieResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/movies/${showtime.movieid}`);
           const movieData = await movieResponse.json();
 
           memberTicketData[filteredTickets[i]._id] = {
@@ -86,7 +86,7 @@ const Profile = () => {
     ) {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch(`/tickets/${ticketId}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tickets/${ticketId}`, {
           method: "DELETE",
           headers: { Authorization: `Bearer ${token}` },
         });

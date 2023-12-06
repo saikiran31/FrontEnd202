@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
             if (token) {
                 try {
                     // Replace '/api/verifyToken' with your actual endpoint
-                    const response = await fetch('/api/verifyToken', {
+                    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/api/verifyToken`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

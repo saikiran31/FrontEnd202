@@ -6,7 +6,7 @@ const LocationAnalytics = () => {
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
-    fetch("/location-analytics")
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/location-analytics`)
       .then((response) => response.json())
       .then((data) => {
         setLocations(data);

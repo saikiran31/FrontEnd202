@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-
+import { useAuth } from './AuthContext';
 
 
 const Showtimes = () => {
   const [moviesWithShowtimes, setMoviesWithShowtimes] = useState([]);
   const [isLoading, setIsLoading] = useState(true); // New state for tracking loading
   const navigate = useNavigate();
+  const { auth } = useAuth();
 
   useEffect(() => {
     const fetchMoviesAndShowtimes = async () => {
       try {
         setIsLoading(true); // Start loading
         // Fetch all movies
-        const moviesResponse = await axios.get("/movies");
+        const moviesResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/movies`);
         const movies = moviesResponse.data;
         // Parallelize fetching theaters and showtimes for each movie
         const moviesPromises = movies.map(async (movie) => {
@@ -60,7 +61,7 @@ const Showtimes = () => {
     if (window.confirm("Are you sure you want to delete this showtime?")) {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`/showtimes/${showId}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/showtimes/${showId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -110,10 +111,12 @@ const Showtimes = () => {
                           {formattedDate} at
                           {showtime.showStartTime}
                         </Link>
+                        {auth.isAuthenticated && auth.role === 'admin' && (
                         <div className="admin-controls">
                           <button onClick={() => handleUpdate(showtime._id)}>Update</button>
                           <button onClick={() => handleDelete(showtime._id)}>Delete</button>
                         </div>
+                          )}
                       </li>
                     );
                   })}

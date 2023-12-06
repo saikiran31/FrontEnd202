@@ -13,7 +13,7 @@ export default function Membership_Options() {
     };
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`/member/${auth.id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/member/${auth.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

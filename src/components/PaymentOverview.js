@@ -18,12 +18,12 @@ const PaymentOverview = () => {
   useEffect(() => {
     const fetchTheaterDetails = async () => {
       try {
-        const showtimeResponse = await axios.get(`/showtimes/${showtimeId}`);
+        const showtimeResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/showtimes/${showtimeId}`);
         const { screen_id } = showtimeResponse.data;
-        const screenResponse = await axios.get(`/screens/${screen_id}`);
+        const screenResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/screens/${screen_id}`);
         const { theatre_id } = screenResponse.data;
 
-        const theaterResponse = await axios.get(`/theatres/${theatre_id}`);
+        const theaterResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/theatres/${theatre_id}`);
         setTheaterDetails({
           theaterName: theaterResponse.data.theatreName,
           screenNumber: screenResponse.data.screen_no,
@@ -41,7 +41,7 @@ const PaymentOverview = () => {
     const fetchRewardPoints = async () => {
       try {
         // Replace with the actual API endpoint to fetch user's profile
-        const profileResponse = await axios.get(`/member/${auth?.id}/profile`);
+        const profileResponse = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/member/${auth?.id}/profile`);
         const rewardPoints = profileResponse.data?.rewards || 0;
         setRewardPoints(rewardPoints);
       } catch (error) {
@@ -87,7 +87,7 @@ const handlePaymentSubmission = async (paymentMethod) => {
     ticketData.seatsBooked = selectedSeats;
 
     // Submit ticket data
-    await axios.post('/tickets', ticketData);
+    await axios.post(`${process.env.REACT_APP_BACKEND_URL}/tickets`, ticketData);
 
     // Navigate to Payment page with all necessary details, including theater details
     navigate('/payment', {

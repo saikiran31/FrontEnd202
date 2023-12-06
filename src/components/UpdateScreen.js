@@ -15,7 +15,7 @@ const UpdateScreen = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`/screens/${id}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/screens/${id}`);
       const data = await response.json();
       setScreen(data);
     };
@@ -32,7 +32,7 @@ const UpdateScreen = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`/screens/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/screens/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

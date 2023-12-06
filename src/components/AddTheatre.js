@@ -12,7 +12,7 @@ function AddTheatre () {
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
     const registerApi = (body) => {
-        return axios.post("/theatres", body, {
+        return axios.post(`${process.env.REACT_APP_BACKEND_URL}/theatres`, body, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`

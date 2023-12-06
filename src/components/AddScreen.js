@@ -10,7 +10,7 @@ function AddScreen() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("/theatres")
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/theatres`)
             .then((response) => response.json())
             .then((data)=>{
                 setTheatres(data);
@@ -26,7 +26,7 @@ function AddScreen() {
     const token = localStorage.getItem('token');
 
     const registerApi = (body) => {
-        return axios.post("/screens", body, {
+        return axios.post(`${process.env.REACT_APP_BACKEND_URL}/screens`, body, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`

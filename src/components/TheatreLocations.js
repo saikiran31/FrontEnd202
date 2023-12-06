@@ -9,7 +9,7 @@ const TheatreLocations = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch(`/locations/${id}`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/locations/${id}`)
       .then((res) => res.json())
       .then((data) => setTheatres(data))
       .catch((error) =>
@@ -21,7 +21,7 @@ const TheatreLocations = () => {
     if (window.confirm("Are you sure you want to delete this movie?")) {
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`/theatres/${theatreId}`, {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/theatres/${theatreId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`

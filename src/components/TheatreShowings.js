@@ -11,18 +11,18 @@ const TheatreShowings = () => {
   useEffect(() => {
     const fetchTheatreShowings = async () => {
       try {
-        const theatreResponse = await fetch(`/theatres/${theatreId}`);
+        const theatreResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/theatres/${theatreId}`);
         const theatreData = await theatreResponse.json();
         setTheatre(theatreData);
 
         let movies = {};
         const moviesResponse = await fetch(
-          `/locations/${theatre.city}?theatreid=${theatreId}`
+          `${process.env.REACT_APP_BACKEND_URL}/locations/${theatre.city}?theatreid=${theatreId}`
         );
         const moviesData = await moviesResponse.json();
         for (let i = 0; i < moviesData.length; i++) {
           const movieShowsData = await fetch(
-            `/locations/${theatre.city}?theatreid=${theatreId}&movieid=${moviesData[i]._id}`
+            `${process.env.REACT_APP_BACKEND_URL}/locations/${theatre.city}?theatreid=${theatreId}&movieid=${moviesData[i]._id}`
           );
           const movieShows = await movieShowsData.json();
           movies[moviesData[i]._id] = {

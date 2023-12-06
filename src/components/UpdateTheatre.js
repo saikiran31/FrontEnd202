@@ -13,7 +13,7 @@ const UpdateTheatre = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`/theatres/${id}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/theatres/${id}`);
       const data = await response.json();
       setTheatre(data);
     };
@@ -30,7 +30,7 @@ const UpdateTheatre = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`/theatres/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/theatres/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

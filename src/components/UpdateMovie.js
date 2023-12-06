@@ -18,7 +18,7 @@ const UpdateMovie = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`/movies/${id}`);
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/movies/${id}`);
       const data = await response.json();
       setMovie(data);
     };
@@ -35,7 +35,7 @@ const UpdateMovie = () => {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`/movies/${id}`, {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/movies/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

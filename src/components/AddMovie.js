@@ -14,7 +14,7 @@ function AddMovie() {
     const navigate = useNavigate();
     const token = localStorage.getItem('token');
     const registerApi = (body) => {
-        return axios.post("/movies", body, {
+        return axios.post(`${process.env.REACT_APP_BACKEND_URL}/movies`, body, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
