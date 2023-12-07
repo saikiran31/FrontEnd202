@@ -27,7 +27,7 @@ const Showtimes = () => {
           // Fetch showtimes for each theatre in parallel
           const theatrePromises = theatres.map(async (theatre) => {
             const showtimesResponse = await axios.get(
-              `/movies?movieid=${movie._id}&theatreid=${theatre._id}`
+              `${process.env.REACT_APP_BACKEND_URL}/movies?movieid=${movie._id}&theatreid=${theatre._id}`
             );
             theatre.showtimes = showtimesResponse.data;
             return theatre;
