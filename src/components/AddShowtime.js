@@ -69,8 +69,8 @@ function AddShowtime() {
     const onAddShowtime = useCallback(async (event, values) => {
         event.preventDefault();
         const data = event.target;
-        const movieid = movies.find(item => item.movieName==data.movieName.value)._id
-        const screenid = screens.find(item => item.screen_no==data.screenNo.value)._id
+        const movieid = movies.find(item => item.movieName===data.movieName.value)._id
+        const screenid = screens.find(item => item.screen_no===data.screenNo.value)._id
         const body = {
           movieid: movieid,
           showDate: data.showDate.value,
