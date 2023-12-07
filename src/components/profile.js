@@ -39,7 +39,7 @@ const Profile = () => {
         // Fetch tickets purchased
         const ticketsResponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/tickets`);
         const ticketsResponseData = await ticketsResponse.json();
-        const filteredTickets = ticketsResponseData.filter((ticket) => ticket.memberid === id);
+        const filteredTickets = ticketsResponseData.filter((ticket) => ticket.memberid === id && ticket.memberid !== undefined);
 
         let memberTicketData = {};
         for (let i = 0; i < filteredTickets.length; i++) {
